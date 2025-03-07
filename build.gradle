@@ -1,0 +1,69 @@
+plugins {
+    id("fabric-loom") version "1.9-SNAPSHOT"
+}
+
+base {
+    archivesName = project.property("archives_base_name").toString()
+    version = project.property("mod_version").toString()
+    group = project.property("maven_group").toString()
+}
+repositories {
+    maven {
+        name = "Meteor Dev Releases"
+        url = "https://maven.meteordev.org/releases"
+    }
+    maven {
+        name = "Meteor Dev Snapshots"
+        url = "https://maven.meteordev.org/snapshots"
+    }
+}
+loom {
+    accessWidenerPath = file("src/main/resources/Cope.accesswidener")
+}
+dependencies {
+    // Fabric
+    minecraft("com.mojang:minecraft:${project.property("minecraft_version")}")
+    mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
+    modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
+    implementation 'org.json:json:20210307'
+
+    // Meteor
+    modImplementation("meteordevelopment:meteor-client:${project.property("meteor_version")}")
+}
+tasks {
+    processResources {
+        def projectProperties = [
+            "version"   : project.version,
+            "mc_version": project.property("minecraft_version"),
+            "commit"    : project.findProperty("commit") ?: ""
+        ]
+
+        inputs.properties(projectProperties)
+
+        filteringCharset = "UTF-8"
+
+        filesMatching("fabric.mod.json") {
+            expand(projectProperties)
+        }
+    }
+
+    jar {
+        from("LICENSE") {
+            rename { "${it}_${project.archivesName}" }
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    options.release = 21
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "copeium-client",
+  "version": "${version}",
+  "name": "Copeium Client",
+  "description": "The best ever meteor addon def not skidded",
+  "authors": [
+    "Punchy"
+  ],
+  "contact": {
+    "repo": "Discord punchy39_alt"
+  },
+  "icon": "assets/nc/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "cope.client.Cope"
+    ]
+  },
+  "mixins": [
+    "addon-template.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "153,45,34"
+  },
+  "accessWidener": "Cope.accesswidener",
+  "breaks": {
+    "rrls": "*"
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": "1.21.4",
+    "meteor-client": "*"
+  },
+  "recommends": {
+    "meteor-client": "*"
+  }
+}

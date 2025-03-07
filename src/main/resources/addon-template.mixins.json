@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "cope.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "DisconnectedScreenMixin",
+    "GameMenuScreenMixin",
+    "IMultiplayerScreenAccessor",
+    "Logo",
+    "MinecraftClientMixin",
+    "PlayerListEntryMixin",
+    "RotatingCubeMapRendererMixin",
+    "ScreenMixin",
+    "ServerCopy",
+    "ServerListMixin",
+    "SystemsMixin",
+    "TitleScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
